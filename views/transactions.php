@@ -33,14 +33,20 @@
         </thead>
         <tbody>
             <?php if (! empty($transactions)) : ?>
-            <?php foreach ($transactions as $transaction) : ?>
+                <?php foreach ($transactions as $transaction) : ?>
                 <tr>
                     <td><?= $transaction['date'] ?></td>
                     <td><?= $transaction['check'] ?></td>
                     <td><?= $transaction['description'] ?></td>
-                    <td><?= $transaction['amount'] ?></td>
+                    <td>
+                        <?php if ($transaction['amount'] > 0) : ?>
+                            <span style="color: green;"><?= $transaction['amount'] ?></span>
+                        <?php elseif ($transaction['amount'] < 0) : ?>
+                            <span style="color: red;"><?= $transaction['amount'] ?></span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             <?php endif; ?>
         </tbody>
         <tfoot>
